@@ -14,7 +14,7 @@ class SignUpView extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding:  EdgeInsets.symmetric(
-            horizontal: 10.w
+            horizontal: 20.w
           ),
           child: CustomScrollView(
             slivers: [
@@ -72,4 +72,3 @@ class SignUpView extends StatelessWidget {
     );
   }
 }
-

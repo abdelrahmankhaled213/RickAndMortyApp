@@ -5,6 +5,7 @@ import 'package:ecommerce_app/features/onBoardingScreen/Presentation/widgets/Num
 import 'package:ecommerce_app/features/onBoardingScreen/Presentation/widgets/buildRow.dart';
 import 'package:ecommerce_app/features/onBoardingScreen/Presentation/widgets/onBoardingColumnWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 class OnBoardingView extends StatefulWidget {
@@ -26,10 +27,10 @@ CustomRow(
   currentindex:index1+1,
 ),
           SizedBox(
-            height: MediaQuery.of(context).size.height/7,
+            height: MediaQuery.of(context).size.height/15,
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height/3,
+            height:400.h,
             width: MediaQuery.of(context).size.width,
             child:
             PageView.builder(
@@ -58,20 +59,21 @@ CustomRow(
             ),
             child:
             Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
               children: [
 
                SizedBox(
-                 child:  Text(
-                   textAlign: TextAlign.center,'''
-              Amet minim mollit non deserunt ullamco est 
-              sit aliqua dolor do amet sint. Velit officia
-               consequat duis enim velit mollit.
-               ''',style: Styles.Montserratgrey16w300,
+height:80.h,
+          width: 340.w,
+                 child: Text(
+                   textAlign: TextAlign.center," Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit"
+
+
+                 ,style: Styles.Montserratgrey16w300,
                                ),
                ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.width/2.3,
+                  height: 60.h,
                 ),
                 buildRow(
                   pagecont: pageController,

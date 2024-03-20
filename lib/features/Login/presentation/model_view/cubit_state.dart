@@ -1,9 +1,19 @@
 abstract class LoginState{
 
 }
+class ForgotPasswordLoadingState extends LoginState{
+
+}
+class ForgotPasswordLoadedState extends LoginState{
+
+}
+class ForgotPasswordFaliureState extends LoginState{
+
+}
 class InitialStateLoginState extends LoginState{
 
 }
+
 class LoadingLogin extends LoginState{
 
 }

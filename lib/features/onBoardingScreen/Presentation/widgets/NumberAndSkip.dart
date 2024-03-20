@@ -30,7 +30,7 @@ CustomTextRich(
     fontWeight: FontWeight.w300,
     fontSize: 18.sp,
   ),
-  text2: "/${onboardingchange.length-1}",
+  text2: "/${onboardingchange.length}",
   textstyle2: Styles.Montserratgrey16w300.copyWith(
         fontSize: 18.sp
     ),

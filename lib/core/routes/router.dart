@@ -1,11 +1,13 @@
 import 'package:ecommerce_app/features/GetStarted/GetStarted.dart';
 import 'package:ecommerce_app/features/Home/presentation/Ui/homescreenview.dart';
+import 'package:ecommerce_app/features/Login/presentation/UI/Forgot%20Password.dart';
 import 'package:ecommerce_app/features/Login/presentation/UI/LoginView.dart';
 import 'package:ecommerce_app/features/Login/presentation/model_view/cubit.dart';
 import 'package:ecommerce_app/features/SignUp/presentation/Model_View/cubit.dart';
 import 'package:ecommerce_app/features/SignUp/presentation/Ui/SignUpView.dart';
 import 'package:ecommerce_app/features/SplashScreen/SplashScreen.dart';
 import 'package:ecommerce_app/features/onBoardingScreen/Presentation/Ui/OnBoardingView.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,5 +20,14 @@ final  GoRouter gorouter=GoRouter(
       GoRoute(path: "/SignUpView",builder: (context, state) =>
           BlocProvider(create:(context) => SignUpCubit() ,child: SignUpView()),),
       GoRoute(path: "/LoginView",builder: (context, state) =>
-          BlocProvider(create: (context) => LoginCubit(),child: LoginScreenView()),), GoRoute(path: "/HomeView",builder: (context, state) => HomeScreenView(),)
+          BlocProvider(create: (context) => LoginCubit(),child: LoginScreenView()),),
+          GoRoute(path: "/HomeView",builder: (context, state) => HomeScreenView(),),
+          GoRoute(path: "/ForgotPasswordView",builder: (context, state) => BlocProvider(create: (context)
+          => LoginCubit(),child:  ForgotPassword()),)
 ]);
+void goPush(String location,BuildContext context){
+  GoRouter.of(context).push(location);
+}
+void goPushReplacement(String location,BuildContext context){
+  GoRouter.of(context).push(location);
+}

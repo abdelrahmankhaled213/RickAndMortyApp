@@ -21,7 +21,7 @@ CustomTextFormField({
   Widget build(BuildContext context) {
     return SizedBox(
       height: 55.h,
-      width: MediaQuery.of(context).size.width/1.5,
+      width: 317.w,
 
       child: TextFormField(
         obscureText: obstext??false,
