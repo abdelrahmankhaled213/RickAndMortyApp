@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:ecommerce_app/core/Config/Config.dart';
 import 'package:ecommerce_app/core/Utills/colors.dart';
 import 'package:ecommerce_app/core/database/cachehelper.dart';
 import 'package:ecommerce_app/core/routes/router.dart';
@@ -10,20 +9,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
-  ]);
-  // await Config.LoadLang("en");
-await CacheHelper().intializeSharedPref();
-  Platform.isAndroid?await Firebase.initializeApp(
- options:
- const FirebaseOptions(apiKey: "AIzaSyCjeTXWGeA04teWPYD-5JoKJZ2tf6SInz8",
-     appId: "1:212221207991:android:84728c8099285acd7d3432",
-     messagingSenderId: "212221207991",
-     projectId: "stylish-5cd17")
-  ):await Firebase.initializeApp();
-
+makeLandOrPort();
+  await CacheHelper().intializeSharedPref();
+   firebaseOptions();
   runApp(const MyApp());
 }
 
@@ -48,4 +36,19 @@ class MyApp extends StatelessWidget {
 
     );
   }
+}
+void makeLandOrPort(){
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]);
+}
+void firebaseOptions()async{
+  Platform.isAndroid?await Firebase.initializeApp(
+      options:
+      const FirebaseOptions(apiKey: "AIzaSyCjeTXWGeA04teWPYD-5JoKJZ2tf6SInz8",
+          appId: "1:212221207991:android:84728c8099285acd7d3432",
+          messagingSenderId: "212221207991",
+          projectId: "stylish-5cd17")
+  ):await Firebase.initializeApp();
 }
