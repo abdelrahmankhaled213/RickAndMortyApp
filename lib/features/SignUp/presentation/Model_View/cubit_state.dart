@@ -22,3 +22,9 @@ class ChangeIconState extends AuthState{
 class ChangeIconConfirmPasswordState extends AuthState{
 
 }
+class GoogleSignUpSuccess extends AuthState{
+
+}
+class GoogleSigUpFailed extends AuthState{
+
+}

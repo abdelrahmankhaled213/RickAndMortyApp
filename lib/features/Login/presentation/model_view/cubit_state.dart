@@ -8,7 +8,10 @@ class ForgotPasswordLoadedState extends LoginState{
 
 }
 class ForgotPasswordFaliureState extends LoginState{
-
+String faliuremsg;
+ForgotPasswordFaliureState({
+  required this.faliuremsg
+});
 }
 class InitialStateLoginState extends LoginState{
 

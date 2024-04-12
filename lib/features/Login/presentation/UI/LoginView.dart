@@ -2,9 +2,7 @@ import 'package:ecommerce_app/features/Login/presentation/widgets/CustomColumn.d
 import 'package:ecommerce_app/features/Login/presentation/widgets/LoginFormField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 class LoginScreenView extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

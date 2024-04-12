@@ -8,6 +8,7 @@ class LoginCubit extends Cubit<LoginState>{
   LoginCubit():super(InitialStateLoginState());
 bool convert=true;
 var loginkey =GlobalKey<FormState>();
+
 late String email;
 late String password;
 void loginWithEmailAndPassword()async{
@@ -40,7 +41,7 @@ Future<void>forgotPassword()async{
   catch(e){
     error=e.toString();
   }
-  emit(ForgotPasswordFaliureState());
+  emit(ForgotPasswordFaliureState(faliuremsg: error));
 }
 void changeIconState(){
   convert=!convert;

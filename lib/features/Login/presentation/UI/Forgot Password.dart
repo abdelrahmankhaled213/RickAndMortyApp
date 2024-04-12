@@ -1,11 +1,17 @@
 import 'package:ecommerce_app/core/widgets/CustomTextFormField.dart';
+import 'package:ecommerce_app/core/widgets/custombutton.dart';
+import 'package:ecommerce_app/features/Login/presentation/model_view/cubit.dart';
+import 'package:ecommerce_app/features/Login/presentation/model_view/cubit_state.dart';
+import 'package:ecommerce_app/features/Login/presentation/widgets/CustomText.dart';
 import 'package:ecommerce_app/features/Login/presentation/widgets/CustomTextForgotPassword.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var tomakeiteasy=BlocProvider.of<LoginCubit>(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -13,26 +19,58 @@ class ForgotPassword extends StatelessWidget {
         horizontal: 20.w
     ),
       child:
-
-
-      CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(child:
-CustomTextForgotPassword(),
-          ),
-          SliverToBoxAdapter(child:
-      SizedBox(height: 15.h,),
-          ),
+      BlocConsumer<LoginCubit,LoginState>(
+        listener: (context, state) {
+          if(state is ForgotPasswordLoadedState){
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Check your email please")));
+          }
+     if(state is ForgotPasswordFaliureState){
+       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.faliuremsg)));
+     }
+          },
+        builder: (context, state) {
+          return  CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(child:
+              CustomTextForgotPassword(),
+              ),
+              SliverToBoxAdapter(child:
+              SizedBox(height: 15.h,),
+              ),
               SliverToBoxAdapter(child:
               CustomTextFormField(
                 text: "Enter your Email Address",
                 prefixIcon: Icons.email,
                 onchange: (text) {
+tomakeiteasy.email=text;
+                },
+              )
+              ),
+              SliverToBoxAdapter(child:
+              SizedBox(height: 10.h,),
 
-              },)
+
+              ),
+              SliverToBoxAdapter(
+                child: CustomText(),
+              ),
+              SliverToBoxAdapter(child:
+              SizedBox(height: 15.h,),
+
+              ),
+              SliverToBoxAdapter(child:
+              CustomButtonCore(
+                touch: (){
+                  tomakeiteasy.forgotPassword();
+                },
+                text: "Submit",
               )
 
-        ],
+              ),
+            ],
+          );
+        },
+
       ),
     )
     )

@@ -4,8 +4,8 @@ import 'package:ecommerce_app/features/onBoardingScreen/Presentation/model_view/
 import 'package:ecommerce_app/features/onBoardingScreen/Presentation/widgets/NumberAndSkip.dart';
 import 'package:ecommerce_app/features/onBoardingScreen/Presentation/widgets/buildRow.dart';
 import 'package:ecommerce_app/features/onBoardingScreen/Presentation/widgets/onBoardingColumnWidget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 class OnBoardingView extends StatefulWidget {
@@ -67,8 +67,6 @@ height:80.h,
           width: 340.w,
                  child: Text(
                    textAlign: TextAlign.center," Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit"
-
-
                  ,style: Styles.Montserratgrey16w300,
                                ),
                ),
@@ -79,9 +77,11 @@ height:80.h,
                   pagecont: pageController,
                   next: (){
                     if(index1!=2)
-                    pageController.nextPage(duration: const Duration(microseconds: 100), curve: Curves.bounceIn);
-                 else
+                    pageController.nextPage(duration:
+                    const Duration(microseconds: 100), curve: Curves.bounceIn);
+                 else {
                       GoRouter.of(context).push("/SignUpView");
+                    }
                   },
                     prev: (){
                  pageController.previousPage( duration: const Duration(microseconds: 100), curve: Curves.bounceIn);

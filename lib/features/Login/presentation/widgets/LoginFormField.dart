@@ -7,6 +7,7 @@ import 'package:ecommerce_app/features/Login/presentation/model_view/cubit.dart'
 import 'package:ecommerce_app/features/Login/presentation/model_view/cubit_state.dart';
 import 'package:ecommerce_app/features/SignUp/presentation/widgets/Face0rGoogle.dart';
 import 'package:ecommerce_app/features/onBoardingScreen/Presentation/widgets/CustomText.rich.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,14 +19,14 @@ class LoignFormField extends StatelessWidget{
     return BlocConsumer<LoginCubit,LoginState>(
       listener: (context, state) {
 if(state is LoadedLogin){
-  GoRouter.of(context).pushReplacement("/HomeScreenView");
+  GoRouter.of(context).pushReplacement("/BottomNavigationView");
 }
 if(state is FaliureLogin){
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login failed")));
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.faliuremsg)));
 }
-if(state is LoadingLogin){
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login loading")));
-}
+// if(state is LoadingLogin){
+//   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login loading")));
+// }
       },
       builder: (context, state) {
         return  Form(
@@ -79,11 +80,12 @@ goPush("/ForgotPasswordView", context);
 
            ),
                  ):
-                 CustomButtonCore(text: "Create account", touch: (){
+                 CustomButtonCore(text: "Login", touch: (){
           if(tomakeiteasy.loginkey.currentState!.validate()){
             tomakeiteasy.loginWithEmailAndPassword();
           }
-                 }),
+                 }
+                 ),
               SizedBox(
                 height: MediaQuery
                     .of(context)

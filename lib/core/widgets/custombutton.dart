@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/core/Utills/colors.dart';
 import 'package:ecommerce_app/core/Utills/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButtonCore extends StatelessWidget {
 
@@ -16,16 +17,17 @@ CustomButtonCore({
 ElevatedButton(
   onPressed: touch,
   child: Text(
-    "Create Account",
+    text,
     style: Styles.Montserratgrey16w300.copyWith
-      (fontSize: 20,color: AppColor.offWhite),
+      (
+        fontSize: 20.sp,color: AppColor.offWhite,fontWeight: FontWeight.w500),
   ),
   style: ElevatedButton.styleFrom(
     backgroundColor: AppColor.main,
     shape: RoundedRectangleBorder(
       borderRadius:  BorderRadius.circular(4),
     ),
-    fixedSize: Size(MediaQuery.of(context).size.width/1.5, 55),
+    fixedSize: Size(317.w, 50.h),
     elevation: 10
   ),
 );

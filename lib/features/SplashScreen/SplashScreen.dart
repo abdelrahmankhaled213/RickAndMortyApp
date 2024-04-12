@@ -20,8 +20,8 @@ class _HomeScreenViewState extends State<SplashScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset("assets/Images/Group 34010.png",height: 100,width: 125,),
-               SizedBox(width: 10),
+              Image.asset("assets/Images/Group 34010.png",height: 100.h,width: 70.w,),
+               SizedBox(width: 5.w),
             Text("Stylish",style: Styles.LibreCaskonpink40bold),
               ]
           ),

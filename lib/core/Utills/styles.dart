@@ -15,6 +15,7 @@ abstract class Styles{
 fontFamily: "Montserrat",
     color: Colors.black,
     fontSize: 24.sp,
+    fontWeight:FontWeight.w700
   );
   static  TextStyle Montserratgrey16w300  = TextStyle(
     fontFamily: "Montserrat",
@@ -27,6 +28,7 @@ fontFamily: "Montserrat",
     color: AppColor.grey2,
     fontSize: 14.sp
   );
+
 
 
 }

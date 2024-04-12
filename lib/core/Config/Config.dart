@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:flutter/services.dart';
 
@@ -13,4 +14,5 @@ abstract class Config{
 
  localization= jsonDecode(translation);
   }
+
 }

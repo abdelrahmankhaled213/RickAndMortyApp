@@ -1,11 +1,11 @@
 import 'package:ecommerce_app/core/Utills/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-class CustomContainerCore extends StatelessWidget {
+class CustomContainerHome extends StatelessWidget {
 String image;
 void Function() tap;
 
-CustomContainerCore({
+CustomContainerHome({
   required this.image,
   required this.tap,
 

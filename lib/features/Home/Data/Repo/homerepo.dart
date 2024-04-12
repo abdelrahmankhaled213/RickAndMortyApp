@@ -1,27 +1,32 @@
  import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/features/Home/Data/Model/getData.dart';
 import 'package:ecommerce_app/features/Home/Data/webservices/services.dart';
-import 'package:flutter/material.dart';
+class HomeRepo implements Services{
 
-class MensRepo implements Services{
   @override
-  Future<List<Mens>> getMensCategory() async{
-    var menslist=<Mens>[];
- await FirebaseFirestore.instance.collection('Mens').
+  Future<List<HomeData>> getMensCategory() async{
+    var home=<HomeData>[];
+ await FirebaseFirestore.instance.collection('sales').
     get().
     then(
             (value) =>
-                value.docs.forEach(
+                value.docs..forEach(
                     (element) {
-      menslist.add(
-          Mens.
+      home.add(
+          HomeData.
       fromJson(element.data()
       )
       );
     }
     )
     );
-    return menslist;
+    return home;
   }
+
+
+
+
+
+
 
 }

@@ -16,8 +16,8 @@ class FaceOrGoogle extends StatelessWidget{
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomCircleAvatar(img: "assets/Images/google 1.png",ontap: (){
-              BlocProvider.of<SignUpCubit>(context).signInWithGoogle();
+            CustomCircleAvatar(img: "assets/Images/google 1.png",ontap: ()async{
+             await BlocProvider.of<SignUpCubit>(context).signInWithGoogle();
               GoRouter.of(context).pushReplacement("/HomeView");
             },
             ),

@@ -1,7 +1,9 @@
 import 'package:ecommerce_app/core/Utills/styles.dart';
 import 'package:ecommerce_app/core/database/cachehelper.dart';
+import 'package:ecommerce_app/core/injection/injectionservice.dart';
 import 'package:ecommerce_app/features/onBoardingScreen/Presentation/model_view/OnBoardingChange.dart';
 import 'package:ecommerce_app/features/onBoardingScreen/Presentation/widgets/CustomText.rich.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,8 +40,12 @@ CustomTextRich(
 ),
           GestureDetector(
             onTap: ()async{
-              GoRouter.of(context).pushReplacement("/SignUpView");
-              await CacheHelper().setBoolean(true);
+           if(getitinstance<CacheHelper>().getBoolean()==true){
+             FirebaseAuth.instance.currentUser!.emailVerified&&FirebaseAuth.instance.currentUser!=null?
+             GoRouter.of(context).pushReplacement("/BottomNavigationView"):
+             GoRouter.of(context).pushReplacement("/SignUpView");
+           }
+              await getitinstance<CacheHelper>().setBoolean(true);
             },
             child: Text("Skip",style: Styles.Montserratblack24w700.copyWith(
               fontWeight: FontWeight.w300,
