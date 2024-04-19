@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rickandmoartymovieapp/core/Utils/colors.dart';
 import 'package:rickandmoartymovieapp/features/Characters/Data/Model/CharacterModel.dart';
@@ -14,7 +13,6 @@ class DetailsHomeScreeen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-
         slivers: [
           customAppBar(result: result),
           SliverList(delegate: SliverChildListDelegate(
@@ -28,18 +26,18 @@ class DetailsHomeScreeen extends StatelessWidget {
                   children: [
  characterInfo(text: "status",value: result.status.name),
                      buildDivider(context,MediaQuery.of(context).size.width/1.5),
-                   const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height/15,
                     ),
                     characterInfo(text: "Location",value: result. location.name),
                     buildDivider(context,MediaQuery.of(context).size.width/2),
-                    const SizedBox(
-                      height: 10,
+                     SizedBox(
+                      height: MediaQuery.of(context).size.height/15,
                     ),
                     characterInfo(text: "Gender",value: result. gender.name),
                     buildDivider(context,MediaQuery.of(context).size.width/1.2),
-                    const SizedBox(
-                      height: 10,
+                     SizedBox(
+                      height: MediaQuery.of(context).size.height/15,
                     ),
                     characterInfo(text: "Species",value: result.species.name),
                     buildDivider(context,MediaQuery.of(context).size.width/1.5),

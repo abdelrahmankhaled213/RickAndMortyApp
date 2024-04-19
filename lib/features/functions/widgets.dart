@@ -73,10 +73,8 @@ Widget customAppBar({
           fontWeight: FontWeight.w800,
           color: AppColor.grey,
           fontSize: 24,
-
         ),
         ),
       )
-
   );
 }

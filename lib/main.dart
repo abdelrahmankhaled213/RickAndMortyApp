@@ -1,3 +1,4 @@
+import 'package:connection_notifier/connection_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:rickandmoartymovieapp/core/Utils/colors.dart';
 import 'package:rickandmoartymovieapp/core/routes/router.dart';
@@ -12,12 +13,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: ThemeData(
-        scaffoldBackgroundColor: AppColor.grey
-      ),
-    debugShowCheckedModeBanner: false,
-      routerConfig: router,
-    );
+    return
+       MaterialApp.router(
+        theme: ThemeData(
+          scaffoldBackgroundColor: AppColor.grey
+        ),
+      debugShowCheckedModeBanner: false,
+        routerConfig: router,
+      );
+
   }
 }

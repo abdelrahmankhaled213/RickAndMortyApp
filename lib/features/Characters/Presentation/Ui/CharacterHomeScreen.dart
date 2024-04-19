@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:rickandmoartymovieapp/core/Utils/colors.dart';
 import 'package:rickandmoartymovieapp/features/Characters/Data/Model/CharacterModel.dart';
 import 'package:rickandmoartymovieapp/features/Characters/presentation/Model_view/Cubit/cubit.dart';
@@ -83,33 +84,47 @@ getdata();
         ):buildSearchItem(searchcontroller: searchcontroller,
         addSearchItem: addSearchItem)
       ),
-      body: CustomScrollView(
-        slivers: [
-            SliverToBoxAdapter(
-              child: BlocConsumer<CharacterCubit,CharacterState>(
-          builder: (context, state) {
-      if(state is LoadingState)
-      return CustomCircularProgressIndicator();
-      if(state is LoadedState){
-        characterModel=state.characterModel;
-      return gridBuilder(
-         model: characterModel,
-          state: state,
-          context: context,
-          controller: searchcontroller,
-          container: container);
-      }
-      if(state is FaliureState){
-      Text(state.faliuremsg);
-      }
+      body: OfflineBuilder(
+        connectivityBuilder: (context, value, child) {
+          final bool connected=value !=ConnectivityResult.none;
+          if(connected){
+            return CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                    child: BlocConsumer<CharacterCubit,CharacterState>(
+                      builder: (context, state) {
+                        if(state is LoadingState)
+                          return Center(child: CustomCircularProgressIndicator());
+                        if(state is LoadedState){
+                          characterModel=state.characterModel;
+                          return gridBuilder(
+                              model: characterModel,
+                              state: state,
+                              context: context,
+                              controller: searchcontroller,
+                              container: container);
+                        }
+                        if(state is FaliureState){
+                          Text(state.faliuremsg);
+                        }
 
-      return const SizedBox();
-      },
-          listener: (context, state) {
-          },
-            )
-            )
-        ],
+                        return const SizedBox();
+                      },
+                      listener: (context, state) {
+                      },
+                    )
+                )
+              ],
+            );
+          }
+          else{
+            return Center(
+              child: ClipRRect(borderRadius: BorderRadius.circular(25),child: Image.asset("assets/images/img.png"))
+            );
+          }
+
+        },
+child: SizedBox(),
       )
     );
   }
