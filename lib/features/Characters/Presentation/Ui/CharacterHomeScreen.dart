@@ -1,8 +1,11 @@
-
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_offline/flutter_offline.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:rickandmoartymovieapp/core/Utils/colors.dart';
+import 'package:rickandmoartymovieapp/core/networking/Networking_Bloc.dart';
+import 'package:rickandmoartymovieapp/core/networking/Networking_State.dart';
+import 'package:rickandmoartymovieapp/core/networking/networking_event.dart';
 import 'package:rickandmoartymovieapp/features/Characters/Data/Model/CharacterModel.dart';
 import 'package:rickandmoartymovieapp/features/Characters/presentation/Model_view/Cubit/cubit.dart';
 import 'package:rickandmoartymovieapp/features/Characters/presentation/Model_view/Cubit/states.dart';
@@ -13,6 +16,7 @@ class CharacterHomeScreen extends StatefulWidget {
   State<CharacterHomeScreen> createState() => _CharacterHomeScreenState();
 }
 class _CharacterHomeScreenState extends State<CharacterHomeScreen> {
+  StreamSubscription?streamSubscription;
   List<Result> container=[];
   var issearching=false;
 late CharacterModel characterModel;
@@ -33,7 +37,6 @@ setState(() {
 
     });
   }
-  void statSeraching(){}
   List<Widget>builditem(){
     if(issearching==false){
       return [
@@ -42,7 +45,6 @@ setState(() {
               LocalHistoryEntry(onRemove: stopSearching
           )
           );
-
           setState(() {
             issearching=true;
           });
@@ -63,13 +65,24 @@ setState(() {
     // TODO: implement initState
     super.initState();
 getdata();
+     streamSubscription=Connectivity().onConnectivityChanged.listen((event) {
+      if(event[0]==ConnectivityResult.wifi||event[0]==ConnectivityResult.mobile){
+        context.read<NetworkingBloc>().add(OnlineEvent());
+      }
+      else{
+        context.read<NetworkingBloc>().add(OfflineEvent());
+      }
+    });
   }
   getdata()async{
     await BlocProvider.of<CharacterCubit>(context).getChar();
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocBuilder<NetworkingBloc, NetworkingState>(
+
+  builder: (context, state) {
+    return state is  OnlineState?Scaffold(
       appBar: AppBar(
 
         flexibleSpace: const Padding(
@@ -84,11 +97,8 @@ getdata();
         ):buildSearchItem(searchcontroller: searchcontroller,
         addSearchItem: addSearchItem)
       ),
-      body: OfflineBuilder(
-        connectivityBuilder: (context, value, child) {
-          final bool connected=value !=ConnectivityResult.none;
-          if(connected){
-            return CustomScrollView(
+      body:
+           CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
                     child: BlocConsumer<CharacterCubit,CharacterState>(
@@ -111,21 +121,26 @@ getdata();
                         return const SizedBox();
                       },
                       listener: (context, state) {
+
                       },
                     )
                 )
               ],
-            );
-          }
-          else{
-            return Center(
-              child: ClipRRect(borderRadius: BorderRadius.circular(25),child: Image.asset("assets/images/img.png"))
-            );
-          }
+            )
 
-        },
-child: SizedBox(),
-      )
+    ):const Scaffold(
+      body: Center(
+        child: Text("No Internet Connection"),
+      ),
     );
+  },
+);
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    streamSubscription!.cancel();
+    searchcontroller.dispose();
   }
 }
