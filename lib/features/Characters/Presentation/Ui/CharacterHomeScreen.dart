@@ -128,9 +128,10 @@ getdata();
               ],
             )
 
-    ):const Scaffold(
+    ): Scaffold(
       body: Center(
-        child: Text("No Internet Connection"),
+        child: Image.asset("assets/images/Animation - 1719695530572 (1).gif",fit: BoxFit.cover,
+        height: 250,),
       ),
     );
   },
